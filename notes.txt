@@ -1,0 +1,508 @@
+// js notes
+q1. What is JavaScript?
+a1. JavaScript is a synchronous single-threaded language.
+  synchronous - in a specific order(line by line execute code).
+  single-threaded - it means JavaScript can only execute one command at a time.
+
+
+q2. What is the difference between Call, Apply and Bind in JavaScript?
+a2. difference between Call, Apply and Bind-
+ 1.call method: The call method is used to invoke a function with a specified this value and individual arguments.
+ 2.apply method:The apply method is similar to call, but it takes an array-like object of arguments instead of
+  individual arguments.
+ 3.bind method:The bind method is used to create a new function that, when called, has its this value set to a
+  specific value.
+
+let name = {
+    firstName: 'Divya',
+    lastName: 'pandey',
+}
+
+let fullPrintName =  function (city, state){
+    console.log(this.firstName + " " + this.lastName + " " + city + " " + state);
+}
+
+function fullPrintName(){
+    console.log(this.firstName + " " + this.lastName);
+}
+
+let fullPrintName = () => {
+    console.log(this.firstName + " " + this.lastName);
+}
+
+fullPrintName.call(name, 'ujjain', 'm.p.')
+fullPrintName.apply(name, ['ujjain', 'm.p.'])
+let details = fullPrintName.bind(name, 'ujjain', 'm.p.')
+details();
+
+call and apply are used to invoke a function immediately, while bind is used to create a new function with a 
+specific this value.
+call takes individual arguments, apply takes an array-like object of arguments, and bind returns a new function with the 
+specified this value.
+
+
+q3. What are the possible ways to create objects in JavaScript?
+a3. In JavaScript, there are several ways to create objects. Here are some of the common ways:
+     1.Object Literal:
+                    let name={
+                       name:"divya",
+                       age:22
+                      }
+     2.Object Constructor:
+                        let person = new Object();
+                                person.name = "John";
+                                person.age = 30;
+                                person.job = "developer";
+    3.Object.create():
+                    let personPrototype = {
+                    sayHello: function() {
+                    console.log("Hello!");
+                         }
+                    };
+let person = Object.create(personPrototype);
+person.name = "John";
+person.age = 30;
+person.job = "developer";
+
+
+q4. What is JSON and its common operations in JavaScript?
+a4. JSON, JavaScript Object Notation, is used to transmit data between server and web application as an alternative
+    to XML. JSON is a built-in object with two methods, JSON.stringify() and JSON.parse() JSON.stringify()is used to
+    convert JavaScript object into JSON string and JSON.parse() is used to parse JSON string into JavaScript object.
+
+
+q5. What is the difference between == and === operators in JavaScript?
+a5. In JavaScript, the == operator is known as equality operator and is used to compare the values of operands
+    and the === operator is known as strict equality operator and is used to compare both values and types of operands.
+
+
+q6. What is a first class function in JavaScript?
+a6. In JavaScript, functions are first class citizens, which means they are treated as first class objects.
+    This concept of first class function brings several features to the language. 
+    Function as values, function as parameters, function as return values, function as properties of object, 
+    functions as elements of arrays.
+
+
+q7. What is a higher order function in JavaScript?
+a7. A higher order function is a function that takes another function as an argument or return a function as its result.
+    It is called a higher order function.
+
+
+q8. What is Hoisting in JavaScript?
+a8. Hoisting is JavaScript's default behavior of moving all declarations to the top of the current scope 
+    (to the top of the current script or the current function).
+    During memory creation phase, the mechanism of reserving space for variables and functions is called hoisting.
+    It allows us to use functions and variables before they are declared.
+
+
+q9. What is the difference between let and var in JavaScript?
+a9. In JavaScript, let and var are used to declare variables. Variables declared with var are function scoped. This 
+    means that the variable is only accessible within the function in which it is declared. If declared outside of any
+    function, it becomes global variable. Variables declared with let are block scoped. This means that the variable
+    is only accessible within the block (enclosed by curly braces)  in which it is declared.
+
+
+q10. What is a pure function in JavaScript?
+a10. A pure function in JavaScript is a function that, given the same input, will always return the same output and
+     has no side effects. Pure functions are a fundamental concept in functional programming and provide several 
+     benefits, including predictability, testability, and ease of reasoning about code.
+
+
+q11. What are closures in JavaScript?
+a11. Function bundled with its lexical scope is known as closure. Lexical Scope JavaScript uses lexical scoping to
+     resolve the variable names when a function is created inside another function. It determines the function's 
+     parent scope by looking at where the function was created instead of where it was invoked.
+
+
+q12. What is scope in Javascript?
+a12. Scope determines the accessibility (visibility) of variables.
+     JavaScript has 3 types of scope:
+
+     Block scope: Variables declared inside a { } block cannot be accessed from outside the block:
+     Function scope: Variables defined inside a function are not accessible (visible) from outside the function.
+     Global scope: A variable declared outside a function, becomes GLOBAL.
+     Variables declared with the var keyword can NOT have block scope.
+
+
+q13. What is IIFE(Immediately Invoked Function Expression) in JavaScript?
+a13. An IIFE, which is a stand for Immediately Invoked Function Expression, is a JavaScript function that is defined and 
+     executed immediately after it's created. The primary purpose of an IIFE is to create a new scope for variables 
+     preventing them from polluting the global scope. The syntax of an IIFE involves wrapping the function declaration
+     in parentheses and immediately invoking it with an additional set of parentheses.
+       example:-
+          (function() {
+           var localVar = "I'm encapsulated";
+           console.log(localVar); // Accessible inside the IIFE 
+           })();
+
+          console.log(localVar); // ReferenceError: localVar is not defined
+
+          1.The first set of parentheses (function(){...}) is used to define the function expression.
+          2.The second set of parentheses () immediately invokes the function.
+
+
+q14. What is the Temporal Dead Zone in JavaScript?
+a14. The Temporal Dead Zone (TDZ) in JavaScript refers to the period between the start of a block scope 
+     (usually denoted by the opening curly brace ) and the actual declaration of a variable or function
+      within that block scope. During this temporal dead zone, attempting to access the variable or function 
+      results in a ReferenceError.
+      The Temporal Dead Zone occurs when using let and const declarations, as they have block scope and do not 
+      get hoisted to the top of their scope like variables declared with var. Unlike var, which is hoisted and 
+      can be accessed before its declaration, variables declared with let and const are not initialized until the
+      line of code where they are declared is reached.
+
+
+q15. What is a promise in JavaScript?
+a15. Promises are nothing but an object. Promises are used to handle asynchronous operation in JavaScript. 
+     Promise has three states:-
+     1.Pending -The initial state ,The promise is neither fulfilled or rejected.
+     2.Fulfilled- The operation completed successfully and the promise has resulting values. 
+     3.Rejected- The promise failed and the promise has reason for the failure.
+
+
+q16. Why do you need a promise in JavaScript?
+a16. Promises are used to handle asynchronous operations in JavaScript. 
+     Here are several reasons why promises are beneficial: Improved Readability and Maintainability, 
+     avoiding callback hell, error handling, chaining multiple asynchronous operations.
+
+
+q17. What is a callback function in JavaScript?
+a17. In JavaScript, a callback function is a function that is passed as an argument to another function and 
+     it is executed after the completion of a specific task. Callbacks are a way to ensure that certain code does 
+     not execute until the task is completed, making them particularly useful for handling asynchronous operations.
+
+
+q18. Why do we need callbacks in JavaScript?
+a18. In JavaScript, callback function is a function that is passed as an argument to another function and it is executed 
+     after the completion of a specific task. Callbacks are a way to ensure that certain code does not execute until the
+     task is completed, making them particularly useful for handling asynchronous operations. Callback functions are
+     commonly used in scenarios such as asynchronous operation ,event handling, iterating over arrays, generalizing 
+     behaviors.
+
+
+q19. What is a strict mode in Javascript?
+a19. Strict mode is a feature in Javascript that was introduced in ECMAScript5 to help developers write more robust 
+     and error-free code by catching common mistakes and preventing the use of certain error-prone features. When you 
+     enable strict mode in your Javascript code, the interpreter applies a stricter set of rules and generates a more 
+     meaningful error message.
+
+
+q20. Why do you need strict mode in JavaScript?
+a20. Strict mode in JavaScript provides a way to catch common programming errors and prevent the use of certain 
+     error-prone features. Enabling strict mode is a best practice in modern JavaScript development for several reasons.
+     Error detection, undeclared variables, duplicate parameters, `this` value coercion, prohibited octal syntax, restrict
+     eval.
+
+
+q21. What is undefined property in JavaScript?
+a21. In JavaScript, when you try to access a property of an object that does not exist, the result is undefined.
+
+
+q22. which features are added in ecmascript6 in js?
+a22. 1.arrow Function
+     2.spread / rest operator
+     3.let and const
+     4.destructuring
+     5.promise
+     6.module export/import
+     7.Template Literals
+     8.Default Parameters
+     9.classes
+
+
+q23. What is null value in JavaScript?
+a23. In JavaScript, null is a special value that represents the intentional absence of any object value.
+
+
+q24. What is the difference between null and undefined in JavaScript?
+a24. In JavaScript, null and undefined are both values that represent the absence of meaningful value. 
+     Null is a special value that represents the intentional absence of any object value.
+     Undefined is a special value to a variable that has been declared but has not assigned a value.
+
+
+q25. What are the differences between undeclared and undefined variables in JavaScript?
+a25. Undefined: It occurs when a variable has been declared but has not been assigned any value. 
+     Undefined is not a keyword. Undeclared: It occurs when we try to access any variable that is not
+     initialized or declared earlier using the var, let or const keyword.
+
+
+q26. What is a callback hell in JavaScript?
+a26. Callback hell, also known as the Pyramid of Doom or the callback pyramid, refers to a situation in JavaScript
+     programming where multiple nested callbacks make the code difficult to read and maintain. This typically occurs
+     when dealing with asynchronous operations such as callbacks within callbacks  within callbacks and so on.
+
+
+q27. What is promise chaining in JavaScript?
+a27. Promise chaining in JavaScript refers to the practice of connecting multiple asynchronous operations using
+     promise in a sequential and more readable manner. This is often used to avoid callback hell or nested callback
+     structure making the code more maintainable.
+
+
+q28. What is Promise.all() in JavaScript?
+a28. Promise.all() is a method in JavaScript that takes an iterable (e.g., an array) of promises as input and returns
+     a single promise. This resulting promise is fulfilled with an array of the resolved values from all the input
+     promises. If any of the input promises is rejected, the Promise.all() promise is immediately rejected with the 
+     reason of the first rejected promise.
+
+
+q29. What is an event flow in JavaScript?
+a29. Event flow in JavaScript refers to the order in which events are handled in the Document Object Model (DOM) 
+     hierarchy. The DOM is a tree-like structure that represents the structure of an HTML document, and events can occur
+     on various elements within this structure. There are two phases of event flow in the DOM: the capturing phase and
+     the bubbling phase.
+
+
+q30. What is event bubbling in JavaScript?
+a30. Event Bubbling is a concept in the DOM (Document Object Model). It happens when an element receives an event, 
+     and that event bubbles up (or you can say is transmitted or propagated) to its parent and ancestor elements in 
+     the DOM tree until it gets to the root element.
+
+
+q31. What is event capturing in JavaScript?
+a31. In event capturing, an event propagates from the outermost element to the target element. It is the opposite of 
+     event bubbling, where events propagate outwards from the target to the outer elements. Events trickle down in event 
+     capturing. Capturing happens before bubbling.
+     
+     
+q32. What is memoization in JavaScript?
+a32. Memoization is a technique for saving values written by a function so that you don't have to repeat calculation 
+     you have already done.
+
+
+q33. What are events in JavaScript?
+a33. In JavaScript, events are actions or occurrences that happen in the browser, typically as a result of user 
+     interactions or other activities. Examples of events include mouse, click, keyboard, inputs, page loading, form 
+     submission, and more. JavaScript allows you to capture and respond to that event, enabling you to create interactive
+     and dynamic web pages. Events are the part of DOM and are associated with HTML elements. When an event occurs, it 
+     can trigger the execution of JavaScript code, allowing you to respond to the event by modifying the content or
+      behavior of the page.
+
+
+q34. What is the use of preventDefault method in JavaScript?
+a34. The preventDefault method is a function provided by the event object in JavaScript. It is used to prevent the 
+     default behavior associated with the event. The preventDefault method allows you to stop the default action from 
+     happening.
+
+
+q35. What is the use of stopPropagation method in JavaScript?
+a35. StopPropagation method stops the bubbling of an event to parent elements, preventing any parent event 
+     handlers from being executed.
+
+
+q36. What is BOM in JavaScript?
+a36. BOM stands for Browser Object Model in JavaScript. It is a set of objects provided by web browsers to interact 
+     with the browser itself. While the term deals with the structure and content of a web document, HTML or XML, 
+     the BOM provides objects and methods to interact with the browser itself, the window, and the other browser-specific
+     features, like window object, location object, navigator object, screen object, history object, document object.
+
+
+q37. What is the use of setTimeout in JavaScript?
+a37. SetTimeout is a function in JavaScript that is used to delay the execution of a given function or a piece of code 
+     for a specified amount of time. It allows you to schedule the execution of a function after a certain duration 
+     measured in milliseconds.
+    // setTimeout allows us to run a function once after a interval of time.
+
+q38. What is the use of setInterval in JavaScript?
+a38. SetInterval is another function in JavaScript that is used to repeatedly execute a given function or piece of 
+     code at specified intervals. It is similar to setTimeout but instead of executing the function once after a delay, 
+     setInterval continues to execute the function at regular intervals until it is cleared.
+     // it runs the function not only once but regularly after the given interval of time. to stop futher calls we acn use clearInterval.
+
+q39. What is an event delegation in JavaScript?
+a39. Event delegation is a technique in JavaScript where instead of attaching an event handler to each individual
+     element, you attach a single event handler to a common ancestor of those elements. This single event handler 
+     then watches for events to bubble up from the child elements to the common ancestor.
+
+
+q40. What is the purpose JSON.stringify() in JavaScript?
+a40. JSON.stringify() is a method in JavaScript that converts a JavaScript object or value to a JSON string. JSON 
+     stands for JavaScript Object Notation and it's a lightweight data interchange format. JSON is often used to 
+     exchange data between a server and web application.
+
+
+q41. How do you parse JSON string in JavaScript?
+a41. To parse JSON string in JavaScript, use JSON.parse() method that converts the JSON string into JavaScript object.
+
+
+q42. What is a Regular Expression in JavaScript?
+a42. A regular expression is a sequence of characters that forms a search pattern. When you search for data in a text,
+     you can use this search pattern to describe what you are searching for. A regular expression can be a single 
+     character or a more complicated pattern.
+
+
+q43. What is the currying function in JavaScript?
+a43. Currying is a technique in functional programming where a function is transformed into a sequence of functions, 
+     each taking a single argument. The curryed function returns a new function for each argument until it has received 
+     all the arguments it needs to execute.
+
+
+q44. What is a spread operator in JavaScript?
+a44. The JavaScript spread operator allows us to quickly copy all or part of an existing array or object into another 
+     array or object.
+
+
+q45. What is the main difference between Object.values() and Object.entries() method in JavaScript?
+a45. Object.values() Method:
+      1.Returns an array of values of the enumerable properties of an object.
+      2.Ignores property names and only gives you the values.
+      3.The order of the values in the array corresponds to the order in which they appear in the object.
+
+      Object.entries() Method:
+      1.Returns an array of arrays, where each inner array contains two elements: the key and the corresponding value for each enumerable 
+        property of the object.
+      2.Provides both the property names (keys) and their values.
+      3.The order of the entries in the array is the same as the order in which they appear in the object.
+       Object.values() returns an array of values.
+       Object.entries() returns an array of arrays, each containing a key-value pair.
+
+
+q46. What is an anonymous function in JavaScript?
+a46. An anonymous function in JavaScript is a function that does not have a name. It is a function without an identifier. 
+     Instead of being defined with a name, anonymous functions are often created dynamically at runtime and assigned to
+     variables or passed as an argument to other functions.
+
+
+q47. What is an event loop in JavaScript?
+a47. The event loop constantly checks the Call Stack and the callback Queue.
+    If the Call Stack is empty, the event loop takes the next function from the callback Queue and pushes its 
+    corresponding callback function onto the Call Stack for execution.
+    This process repeats, allowing asynchronous operations to be handled without blocking the main thread.
+
+
+q48. What is call stack in JavaScript?
+a48. JavaScript uses a single-threaded model with a call stack to keep track of the currently executing function. 
+     The call stack is a data structure that stores the execution context of functions.
+
+
+q49. What is an event queue in JavaScript?
+a49. The event queue, or message queue, is a data structure that holds messages (events) and their associated callback
+     functions. These messages are generated as a result of asynchronous operations such as user input, timer callbacks, 
+     or network requests.
+
+
+q50. What is a micro task queue in JavaScript?
+a50. In JavaScript, the microtask queue is a concept related to the event loop and is separate from the regular task
+     queue (or message queue). Microtasks are tasks that are scheduled to be executed at the end of the current task 
+     and before the next task from the regular task queue. They have higher priority than the regular tasks, meaning 
+     that the JavaScript engine will execute all available microtasks before moving on to the next regular task.
+
+    Microtasks are often used for tasks that need to be executed as soon as possible, and they are typically scheduled
+     using functions like Promise.resolve().then() or queueMicrotask().
+
+
+q51. Difference between callback queue and micro task queue in JavaScript?
+a51. Callback Queue (Task Queue): Callbacks in the task queue have a lower priority compared to microtasks. They are
+     processed after the microtask queue is empty.
+     Microtask Queue: Microtasks have a higher priority than the task queue. They are processed before the next task 
+     is picked from the task queue.
+
+     Type of Tasks:
+     Callback Queue (Task Queue): Regular asynchronous tasks, such as callbacks from setTimeout, I/O operations, or 
+     events like button clicks, are placed in the callback queue.
+
+     Microtask Queue: Microtasks are usually associated with promises (Promise.resolve().then()) and certain APIs like 
+     queueMicrotask(). Microtasks are used for tasks that should be executed as soon as possible after the current task 
+     and before the next task from the task queue.
+
+
+q52. What is V8 JavaScript engine?
+a52. The V8 JavaScript engine is an open-source, high-performance JavaScript and WebAssembly engine developed by the
+      Chromium project for the Google Chrome Web Browser. It is also used in other projects and platforms, 
+      including Node.js.
+
+
+q53. Difference between Slice vs Splice array methods in Javascript?
+a53. Slice creates a new array containing a portion of the original array without modifying the original array.
+     Splice modifies the original array by adding, removing, or replacing elements in the place.
+
+
+q54. What is the difference between Shallow and Deep copy in JavaScript?
+a54. Shallow Copy:
+1. A shallow copy creates a new object or array and copies the top-level structure of the original object or array.
+2. If the original object or array contains nested objects or arrays, the references to those nested objects or arrays
+   are copied, not the actual nested objects or arrays themselves. This means changes to nested structures in the 
+   copied object will affect the original object, and vice versa.
+3.Shallow copying can be done using methods like Object.assign(), spread operator (...), or by iterating over the 
+     properties or elements and copying them individually.
+           // Shallow copy examples
+           // Using spread operator
+           const originalArray = [1, 2, [3, 4]];
+           const shallowCopyArray = [...originalArray];
+
+           shallowCopyArray[2][0] = 99; // This will also affect originalArray
+Deep Copy:
+1. A deep copy creates a new object or array and recursively copies all levels of nested structures within the original
+   object or array.
+2. As a result, changes made to the nested structures in the copied object do not affect the original object,
+    and vice versa.
+3. Deep copying is more complex and can be achieved using custom recursive functions, libraries like Lodash
+   (_.cloneDeep()), or, in modern JavaScript, the JSON.parse(JSON.stringify(object)) trick.
+                         // Deep copy examples
+                         // Using JSON.parse(JSON.stringify())
+                          const originalArray = [1, 2, [3, 4]];
+                         const deepCopyArray = JSON.parse(JSON.stringify(originalArray));
+
+                         deepCopyArray[2][0] = 99; // This does not affect originalArray
+
+
+q55. Why do we call javascript as dynamic language?
+a55. JavaScript is often referred to as dynamic language due to its dynamic features and behaviors that allow for 
+     flexibility and adaptability during runtime. Dynamic typing in JavaScript variables are not explicitly declared
+     with a data type. The type of a variable is determined dynamically at runtime based on the type of the value it
+     holds. This allows for more flexible and easily typed code. Dynamic memory management in JavaScript manages 
+     memory automatically and developers don't have to explicitly allocate or deallocate memory. But memory is 
+     allocated as needed during the execution of the programming and unused memory is automatically declaimed by
+     the garbage collector. Dynamic object properties in JavaScript can have properties added or removed dynamically
+     during runtime. This flexibility allows for the dynamic creation and modification of object structure.
+
+
+q56. Can I redeclare let and const variables in JavaScript?
+a56. No, you cannot redeclare let and const variables in JavaScript within the same scope. 
+
+
+q57. What is microtask in JavaScript?
+a57. In JavaScript, microtasks refer to a category of tasks that are executed in the microtask queue. The microtask 
+     queue is a part of the event loop mechanism, which is responsible for managing the execution of code in a 
+     non-blocking and asynchronous manner.
+
+    Microtasks are usually associated with promises and other asynchronous operations. When a promise settles 
+    (either resolves or rejects), the associated callbacks are queued as microtasks. The microtask queue has a 
+    higher priority than the task queue, which means microtasks are processed before the next rendering or user 
+    interaction.
+
+
+q58. What are tasks in event loop with respect to JavaScript?
+a58.  In JavaScript, the event loop continuously checks the message queue for events and executes them one at a time.  
+     Events can include user interactions (like clicks or keyboard inputs), network responses, or timers. Here's a 
+     simplified overview of how the event loop works:
+
+Call Stack: JavaScript uses a single-threaded model with a call stack to keep track of the currently executing function. 
+The call stack is a data structure that stores the execution context of functions.
+
+Task Queue and Message Queue: When an asynchronous operation is encountered, such as making an AJAX request, setting a
+ timer, or handling an event, the operation is offloaded to the browser or Node.js runtime, and the callback function 
+ associated with that operation is placed in the Task Queue.The Message Queue is similar to the Task Queue but is 
+ primarily used for events like I/O operations. The Message Queue holds messages that are ready to be processed.
+
+Event Loop: The event loop constantly checks the Call Stack and the Message Queue.
+If the Call Stack is empty, the event loop takes the first message from the Message Queue and pushes its corresponding callback function onto the Call Stack for execution.
+This process repeats, allowing asynchronous operations to be handled without blocking the main thread.
+
+
+q59. What is prototype chain in JavaScript?
+a59. The prototype chain is a fundamental concept in JavaScript that plays a crucial role in how objects inherit
+      properties and methods from other objects. Each object in JavaScript has an associated prototype object and 
+      these objects are linked together to form a chain known as the prototype chain.
+
+
+q60. What is a polyfills in JavaScript?
+a60. A polyfill in the context of JavaScript is a piece of code that provides functionality that is not natively 
+     supported by the web browser. The term polyfill is a combination of poly meaning many and fill indicating that
+     it fills the gaps in functionality. 
+     Polyfills are commonly used to make new ECMAScript features or APIs available in environments that lack native 
+     support for them. This is often necessary when developers want to use the latest JavaScript language features 
+     or APIs in older browsers that do not support them.
+
+
+
+q. Debouncing and throttling 

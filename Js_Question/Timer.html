@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+           
+        }
+        .container h1{
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Timer</h1>
+    <div class="container">
+        <h1 id="hour">00</h1>
+        <h1 id="min">00</h1>
+        <h1 id="sec">00</h1>
+        <h1 id="count">00</h1>
+    </div>
+    <div>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">reset</button>
+    </div>
+    <script>
+        const Starter=document.getElementById("start");
+        const Stoper=document.getElementById("stop");
+        const reseter=document.getElementById("reset");
+        const hour=document.getElementById("hour");
+        const min=document.getElementById("min");
+        const sec=document.getElementById("sec");
+        const cnt=document.getElementById("count");
+
+        Starter.addEventListener('click',start);
+        Stoper.addEventListener('click',stop);
+        reseter.addEventListener('click',reset);
+        var hours=0;
+        var minutes=0;
+        var seconds=0;
+        var count=0;
+
+        let flag=false;
+
+        function start(){
+            flag = true;
+            stopWatch();
+        }
+        function stop(){
+            flag = false;        
+        }
+
+        function reset(){
+        flag=false;
+        var hours=0;
+        var minutes=0;
+        var seconds=0;
+        var count=0;
+
+        hour.innerHTML='00';
+        min.innerHTML='00';
+        sec.innerHTML='00';
+        cnt.innerHTML='00';
+        }
+
+        function stopWatch(){
+            if(flag){
+                var hourString=hours;
+                var minString=minutes;
+                var secString=seconds;
+                var countString=count;
+                if(count < 10){
+                    countString='0'+countString;
+                }
+                if(minutes<10){
+                    minString='0'+minString;
+                }
+                if(seconds<10){
+                    minString='0'+secString;
+                }
+                if(hours<10){
+                    minString='0'+hourString;
+                }
+                count = count+1;
+                cnt.innerText=countString;
+                if(count == 100){
+                    seconds=seconds+1;
+                    sec.innerHTML=secString;
+                    count=0;
+                }
+                if(seconds == 60){
+                    minutes=minutes+1;
+                    min.innerHTML=minString;
+                    seconds=0;
+                }
+                if(minutes == 60){
+                    minutes=minutes+1;
+                    min.innerHTML=minString;
+                    minutes=0;
+                    seconds=0;
+                }
+                setTimeout("stopWatch()",10)
+            }
+        }
+        </script>
+</body>
+</html>

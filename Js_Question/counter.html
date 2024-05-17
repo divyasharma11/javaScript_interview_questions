@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        width: 100px;
+        height: 100px;
+    }
+    .red{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+    .green{
+        width: 100px;
+        height: 100px;
+        background-color: green;
+    }
+</style>
+<body>
+    <h1 id="count">0</h1>
+    <button id="decrement" onclick="decrement()">Decrement</button>
+    <button id="increment" onclick="increment()">Increment</button>
+    <div id="container"></div>
+    
+    <script>
+        const container=document.getElementById("container");
+        let count=0;
+        document.getElementById("count").innerText=count;
+
+        function increment(){
+            count=count+1;
+            document.getElementById("count").innerText=count;
+           
+            setTimeout(()=>{
+                count++;
+                document.getElementById("count").innerText=count;
+            },1000)   
+          
+                container.classList.add("green"); 
+           
+        }
+        
+        function decrement(){
+            if(count > 0){
+            count=count-1;
+            document.getElementById("count").innerText=count;
+            setTimeout(()=>{
+
+                count--;
+                document.getElementById("count").innerText=count;
+            },1000)
+
+            container.classList.remove("green");  
+            container.classList.add("red");  
+        } 
+        }
+       
+    </script>
+</body>
+</html>
